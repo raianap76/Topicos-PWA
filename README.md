@@ -16,6 +16,6 @@ O usuário pode instalar a aplicação no celular (iOS e Android), com as mesmas
 
 * copie e cole no terminal o seguinte comando _npm install http-server_ -g
 
-*depois copie e cole o comando _http-server_ digite enter
+* depois copie e cole o comando _http-server_ digite enter
 
 * No browser ir em _localhost:8080/index.html_ ou apenas abir  o arquivo _index.html_
