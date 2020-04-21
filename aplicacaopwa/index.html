@@ -1,0 +1,95 @@
+<!doctype html>
+<head lang="pt-BR">
+  <title>Calculadora IMC</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+  
+  <link rel="icon" type="image/png" href="/imagens/icones/favicon.ico" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="IMC">
+  <link rel="apple-touch-icon" sizes="72x72" href="/imagens/72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/imagens/144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/imagens/152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/imagens/180.png">
+  
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body>
+  <div style="margin-top:70px"></div>
+  <div class='container'>
+    <div class='container'>
+      <!--<p><img src="/imagens/icones/android-icon-192x192.png"/></p>-->
+
+      <h4>Calculadora  Índice de Massa Corporal</h4>
+      <div class="row">
+        <form class="col s12">
+          <!-- nome -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="nome_usuario" name="nome" type="text" class="validate">
+              <label for="nome">Digite seu nome. </label>
+            </div>
+          </div>
+          <!-- altura -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="altura_usuario" name="altura" type="text" class="validate">
+              <label for="altura">Digite sua altura em centímetros.</label>
+              <span class="helper-text"> Ex: 168 cm</span>
+            </div>
+          </div>
+          <!-- peso -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="peso_usuario" name="peso" type="text" class="validate">
+              <label for="peso">Digite seu peso em Kg.</label>
+              <span class="helper-text"> Ex: 48 kg</span>
+            </div>
+          </div>
+        </form>  
+        <a class="waves-effect waves-light btn right" onclick="calcular_imc()"> Calcular </a> 
+        <!--<img src="https://i1.kknews.cc/SIG=22bdsma/ctp-vzntr/1533900359564624ps5oqrq.jpg" alt="round">-->
+      </div>
+    </div>
+  </div>
+  <script>
+    function calcular_imc(){
+
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+          console.log('ServiceWorker registration successful with scope:',  registration.scope);
+      }).catch(function(error) {
+        console.log('ServiceWorker registration failed:', error);
+      });
+}
+
+      var nome = document.getElementById('nome_usuario').value; 
+      var peso = document.getElementById('peso_usuario').value;
+      var altura = document.getElementById('altura_usuario').value;
+      var altura_em_m = altura/100
+      var imc = peso / (altura_em_m * altura_em_m);
+
+      localStorage.setItem('nome_usuario', nome);
+      localStorage.setItem('peso_usuario', peso);
+      localStorage.setItem('altura_usuario', altura);
+      localStorage.setItem('imc', imc);
+
+      document.location.href='/conteudo.html';
+    }
+
+//icone do android que removi 
+//"src": "/imagens/icones/android-icon-36x36.png",
+//     "sizes": "36x36",
+//     "type": "image/png"
+//   },{
+
+  </script>
+</body>

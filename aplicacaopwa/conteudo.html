@@ -1,0 +1,132 @@
+<!doctype html>
+<head lang="pt-BR">
+  <title>Calculadora IMC / Resultados </title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+ 
+  <link rel="icon" type="image/png" href="/imagens/icones/favicon.ico" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <!-- <meta name="apple-mobile-web-app-title" content="IMC"> -->
+  <link rel="apple-touch-icon" sizes="72x72" href="/imagens/72.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/imagens/144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/imagens/152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/imagens/180.png">
+  
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body onload="exibir_resultado()">
+    <div style="margin-top:50px"></div>
+    <div class='container' >
+    <div class='container'>
+        <div align="center">
+            <!-- resultado imc -->
+            <text id='imc_usuario' style="font-size: 25px;"> . </text>
+            </br>
+            <text id='imc_resultado' style="font-size: 75px;"> . </text>
+        </div>
+        <!-- tabela -->
+        <table id='tabela_resultado'>
+            <thead>
+            <!-- cabecalho -->
+                <tr>
+                <th>IMC</th>
+                <th>RESULTADO</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- < 18,5 -->
+            <tr>
+                <td> Abaixo de 18,5 </td>
+                <td> Abaixo do peso </td>
+            </tr>
+            <!-- 18,5 a 24,9 -->
+            <tr>
+                <td> Entre 18,5 à 24,9 </td>
+                <td> Normal </td>
+            </tr>
+            <!-- 25 a 29 -->
+            <tr>
+                <td> Entre 25 à 29,9 </td>
+                <td> Sobrepeso </td>
+            </tr>
+            <!-- 30 a 34,9 -->
+            <tr>
+                <td> Entre 30 à 34,9 </td>
+                <td> Obesidade Grau 1 </td>
+            </tr>
+
+            <!-- 34,9 a 39,9 -->
+            <tr>
+                <td> Entre 34,9 à 39,9 </td>
+                <td> Obesidade Grau 2 </td>
+            </tr>
+
+            <!-- > 40 -->
+            <tr>
+                <td> Acima de 40 </td>
+                <td> Obesidade Grau 3 </td>
+            </tr>
+            </tbody>
+        </table>
+        </br>
+        <a class="waves-effect waves-light btn left" onclick="home_page()"> Voltar </a>
+    </div>
+  </div>
+
+  <script>
+    function exibir_resultado(){
+        var resultado = localStorage.getItem('imc');
+        
+        // Pega o resultado e o arredonda para cima com duas casas decimais
+        resultado = parseFloat(resultado).toFixed(2);
+        document.getElementById('imc_resultado').innerHTML = resultado;
+
+        // Pega nome do usuario e cria uma mensagem
+        var nome_usuario = localStorage.getItem('nome_usuario');
+        document.getElementById('imc_usuario').innerHTML = 'Olá ' + nome_usuario + ' seu IMC é de:';
+
+        // Altera cor de uma linha da tabela baseado no valor do imc
+        var tabela = document.getElementById('tabela_resultado');
+        var linha = tabela.getElementsByTagName('tr');
+
+        if(resultado < 18.5){
+            linha[1].style.backgroundColor = '#80cbc4';
+        }
+
+        if(resultado > 18.5 && resultado < 24.9){
+            linha[2].style.backgroundColor = '#80cbc4';
+        }
+
+        if(resultado > 25 && resultado < 29.9){
+            linha[3].style.backgroundColor = '#80cbc4';
+        }
+
+        if(resultado > 30 && resultado < 34.9){
+            linha[4].style.backgroundColor = '#80cbc4';
+        }
+
+        if(resultado > 34.9 && resultado < 39.9){
+            linha[5].style.backgroundColor = '#80cbc4';
+        }
+
+        if(resultado > 40){
+            linha[6].style.backgroundColor = '#80cbc4';
+        }
+    }
+
+
+    function home_page(){
+      localStorage.removeItem('nome_usuario');
+      localStorage.removeItem('peso_usuario');
+      localStorage.removeItem('altura_usuario');
+      localStorage.removeItem('imc');
+      document.location.href='/index.html';
+    }
+  </script>
+</body>
